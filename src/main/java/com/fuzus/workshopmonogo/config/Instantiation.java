@@ -3,6 +3,7 @@ package com.fuzus.workshopmonogo.config;
 import com.fuzus.workshopmonogo.domain.Post;
 import com.fuzus.workshopmonogo.domain.User;
 import com.fuzus.workshopmonogo.dto.AuthorDTO;
+import com.fuzus.workshopmonogo.dto.CommentDTO;
 import com.fuzus.workshopmonogo.repository.PostRepository;
 import com.fuzus.workshopmonogo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,13 @@ public class Instantiation implements CommandLineRunner {
                 "Acordei feliz hoje :)",
                 new AuthorDTO(maria)
         );
+
+        CommentDTO comment1 = new CommentDTO("Boa Viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment2 = new CommentDTO("Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(bob));
+        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(comment1, comment2));
+        post2.getComments().add(comment3);
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
